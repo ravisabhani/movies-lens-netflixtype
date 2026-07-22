@@ -1,14 +1,11 @@
-WITH ratings AS (
-  SELECT DISTINCT user_id FROM {{ ref('src_ratings') }}
-),
-
-tags AS (
-  SELECT DISTINCT user_id FROM {{ ref('src_tags') }}
+WITH movies AS (
+    SELECT *
+    FROM {{ ref('src_movies') }}
 )
 
-SELECT DISTINCT user_id
-FROM (
-  SELECT * FROM ratings
-  UNION
-  SELECT * FROM tags
-)
+SELECT
+    movie_id,
+    title AS movie_title,
+    SPLIT(genres, '|') AS genre_array,
+    genres
+FROM movies

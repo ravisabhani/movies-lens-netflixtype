@@ -39,5 +39,5 @@ models:
     +materialized: view
     dim:
       +materialized: table
-    fct:
+    fact:
       +materialized: table
